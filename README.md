@@ -5,7 +5,7 @@ An online working version can be found here: https://countdown-timer-7seg.web.ap
 
 # Future features
 - [x] Autohide "hours" part when initial countdown is less than an hour.
-- [ ] Limit input on the config page.
+- [x] Limit input on the config page.
 - [ ] Auto fill-in something useful on the config page.
 - [ ] Set colors whether time has (almost) passed.
 - [ ] Sync multiple timers (using Firebase)
