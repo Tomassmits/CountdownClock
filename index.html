@@ -9,9 +9,9 @@
   </head>
   <body>
 	<form action="./timer.html" method="get">
-		<p><input class="digitInput" size="2" id="h" name="h" type="text" value="12"></input>h<input class="digitInput" size="2" id="m" name="m" type="text" value="0"></input>m<input class="digitInput" size="2" id="s" name="s" type="text" value="0"></input>s
+		<p><input class="digitInput" size="2" id="h" name="h" type="number" min=0 max=24 value=12></input>h<input class="digitInput" size="2" id="m" name="m" type="number" min=0 max=59 value="0"></input>m<input class="digitInput" size="2" id="s" name="s" type="number" min=0 max=59 value=0></input>s
+		<input id="u" name="u" type="checkbox" checked>Is end time</input>
 		<input type="submit" value="Start"></input></p>
-		<p><input id="u" name="u" type="checkbox" checked>Is end time</input></p>
 	</form>
   </body>
 </html>
