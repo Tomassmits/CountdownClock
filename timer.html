@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Countdown Clock</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="digital-watch" id="theClock" width="100%">
+		<svg style="visibility: hidden; display: none;" width="0" height="0" viewBox="0 0 0 0">
+			<defs>
+				<g id="unit-h">
+					<path d="M00 200 L200 400 L1800 400 L2000 200 L1800 00 L200 00 Z"></path>
+				</g>
+				<g id="unit-v">
+					<path d="M200 00 L00 200 L00 1800 L200 2000 L400 1800 L400 200 Z"></path>
+				</g>
+			</defs>
+		</svg><div class="hour" id="hours">
+			<svg id="hour-1" class="num-x" width="130" height="240" viewBox="0 0 2600 4800">
+				<use xlink:href="#unit-h" class="segment a" x="300" y="0"></use>
+				<use xlink:href="#unit-v" class="segment b" x="2200" y="300"></use>
+				<use xlink:href="#unit-v" class="segment c" x="2200" y="2500"></use>
+				<use xlink:href="#unit-h" class="segment d" x="300" y="4400"></use>
+				<use xlink:href="#unit-v" class="segment e" x="0" y="2500"></use>
+				<use xlink:href="#unit-v" class="segment f" x="0" y="300"></use>
+				<use xlink:href="#unit-h" class="segment g" x="300" y="2200"></use>
+			</svg>
+			<svg id="hour-2" class="num-x" width="130" height="240" viewBox="0 0 2600 4800">
+				<use xlink:href="#unit-h" class="segment a" x="300" y="0"></use>
+				<use xlink:href="#unit-v" class="segment b" x="2200" y="300"></use>
+				<use xlink:href="#unit-v" class="segment c" x="2200" y="2500"></use>
+				<use xlink:href="#unit-h" class="segment d" x="300" y="4400"></use>
+				<use xlink:href="#unit-v" class="segment e" x="0" y="2500"></use>
+				<use xlink:href="#unit-v" class="segment f" x="0" y="300"></use>
+				<use xlink:href="#unit-h" class="segment g" x="300" y="2200"></use>
+			</svg>
+		</div><div class="minute">
+			<svg id="minute-1" class="num-x" width="130" height="240" viewBox="0 0 2600 4800">
+				<use xlink:href="#unit-h" class="segment a" x="300" y="0"></use>
+				<use xlink:href="#unit-v" class="segment b" x="2200" y="300"></use>
+				<use xlink:href="#unit-v" class="segment c" x="2200" y="2500"></use>
+				<use xlink:href="#unit-h" class="segment d" x="300" y="4400"></use>
+				<use xlink:href="#unit-v" class="segment e" x="0" y="2500"></use>
+				<use xlink:href="#unit-v" class="segment f" x="0" y="300"></use>
+				<use xlink:href="#unit-h" class="segment g" x="300" y="2200"></use>
+			</svg>
+			<svg id="minute-2" class="num-x" width="130" height="240" viewBox="0 0 2600 4800">
+				<use xlink:href="#unit-h" class="segment a" x="300" y="0"></use>
+				<use xlink:href="#unit-v" class="segment b" x="2200" y="300"></use>
+				<use xlink:href="#unit-v" class="segment c" x="2200" y="2500"></use>
+				<use xlink:href="#unit-h" class="segment d" x="300" y="4400"></use>
+				<use xlink:href="#unit-v" class="segment e" x="0" y="2500"></use>
+				<use xlink:href="#unit-v" class="segment f" x="0" y="300"></use>
+				<use xlink:href="#unit-h" class="segment g" x="300" y="2200"></use>
+			</svg>
+		</div><div class="second">
+			<svg id="second-1" class="num-x" width="130" height="240" viewBox="0 0 2600 4800">
+				<use xlink:href="#unit-h" class="segment a" x="300" y="0"></use>
+				<use xlink:href="#unit-v" class="segment b" x="2200" y="300"></use>
+				<use xlink:href="#unit-v" class="segment c" x="2200" y="2500"></use>
+				<use xlink:href="#unit-h" class="segment d" x="300" y="4400"></use>
+				<use xlink:href="#unit-v" class="segment e" x="0" y="2500"></use>
+				<use xlink:href="#unit-v" class="segment f" x="0" y="300"></use>
+				<use xlink:href="#unit-h" class="segment g" x="300" y="2200"></use>
+			</svg>
+			<svg id="second-2" class="num-x" width="130" height="240" viewBox="0 0 2600 4800">
+				<use xlink:href="#unit-h" class="segment a" x="300" y="0"></use>
+				<use xlink:href="#unit-v" class="segment b" x="2200" y="300"></use>
+				<use xlink:href="#unit-v" class="segment c" x="2200" y="2500"></use>
+				<use xlink:href="#unit-h" class="segment d" x="300" y="4400"></use>
+				<use xlink:href="#unit-v" class="segment e" x="0" y="2500"></use>
+				<use xlink:href="#unit-v" class="segment f" x="0" y="300"></use>
+				<use xlink:href="#unit-h" class="segment g" x="300" y="2200"></use>
+			</svg>
+		</div>
+	</div>
+
+	<script>
+		function get(parameterName) {
+		var result = null,
+			tmp = [];
+			location.search
+				.substr(1)
+				.split("&")
+				.forEach(function (item) {
+				tmp = item.split("=");
+				if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+				});
+			return result;
+		}
+		//alert( get("h") );
+		
+		function pad(num) {
+			var s = "00" + num;
+			return s.substr(s.length-2);
+		}
+
+		
+		var h=parseInt(get('h'));
+		var m=parseInt(get('m'));
+		var s=parseInt(get('s'));
+		var u=get('u') == "on" ? true : false ;
+		var uDate = new Date();
+		
+		if( isNaN(h) ) window.location.replace("./index.html");	// Forward when no (proper) config provided, based on hours parameter.
+		
+		
+		if( u ) {
+			uDate.setHours(h,m,s);
+		} else {	// We need to set the uDate to the target datetime
+			let diff = s + 60 * ( m + 60 * h );
+			let uTimestamp = uDate.getTime() + diff * 1000;
+			uDate = new Date(uTimestamp);
+		}
+		
+		var showHrs = getSecondsRemaining() >= 3600;
+		
+		function scaleDigits(scale) {
+			document.getElementById("hour-1").style.width=130*scale + "px";
+			document.getElementById("hour-1").style.height=240*scale + "px";
+			document.getElementById("hour-2").style.width=130*scale + "px";
+			document.getElementById("hour-2").style.height=240*scale + "px";
+			document.getElementById("minute-1").style.width=130*scale + "px";
+			document.getElementById("minute-1").style.height=240*scale + "px";
+			document.getElementById("minute-2").style.width=130*scale + "px";
+			document.getElementById("minute-2").style.height=240*scale + "px";
+			document.getElementById("second-1").style.width=130*scale + "px";
+			document.getElementById("second-1").style.height=240*scale + "px";
+			document.getElementById("second-2").style.width=130*scale + "px";
+			document.getElementById("second-2").style.height=240*scale + "px";
+		}
+
+		function loopUpdateTime() {
+			updateTime();
+			setTimeout(loopUpdateTime, 1000);
+		}
+		
+		function getSecondsRemaining() {
+			let currDate = new Date();
+			let currT = Math.round(currDate.getTime()/1000);
+			let uT = Math.round(uDate.getTime()/1000);
+			return uT - currT;
+		}
+		
+		function updateTime() {
+			let dT = getSecondsRemaining();
+			
+			h = Math.floor( dT / 3600 );
+			m = Math.floor( (dT - h * 3600) / 60 );
+			s = Math.floor( (dT - h * 3600 - m * 60) );
+
+			var hour = pad(h);
+			var minute = pad(m);
+			var second = pad(s);
+
+			if( dT <= 0 ) {
+				console.log("Time's up!");
+				hour = "00";
+				minute = "00";
+				second = "00";
+			}
+			
+			document.getElementById("hour-1").setAttribute("class","num-"+hour.substr(0,1));
+			document.getElementById("hour-2").setAttribute("class","num-"+hour.substr(1,1));
+			document.getElementById("minute-1").setAttribute("class","num-"+minute.substr(0,1));
+			document.getElementById("minute-2").setAttribute("class","num-"+minute.substr(1,1));
+			document.getElementById("second-1").setAttribute("class","num-"+second.substr(0,1));
+			document.getElementById("second-2").setAttribute("class","num-"+second.substr(1,1));
+			
+			showOrHideHours();
+			//scaleAll();
+		}
+		
+		loopUpdateTime();
+		
+		function showOrHideHours() {
+			if( showHrs ) {
+				document.getElementById("hours").style.visibility = "visible";
+				document.getElementById("hours").style.display = "inline-block";
+			} else {
+				document.getElementById("hours").style.visibility = "hidden";
+				document.getElementById("hours").style.display = "none";
+			}
+		}
+
+
+		var elem = document.getElementById("theClock");
+		function openFullscreen() {
+			if (elem.requestFullscreen) {
+				elem.requestFullscreen();
+			} else if (elem.mozRequestFullScreen) { /* Firefox */
+				elem.mozRequestFullScreen();
+			} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+				elem.webkitRequestFullscreen();
+			} else if (elem.msRequestFullscreen) { /* IE/Edge */
+				elem.msRequestFullscreen();
+			}
+			}
+
+			elem.addEventListener('dblclick', function (e) {
+			openFullscreen();
+		});
+
+		// Scale the digits properly on canvas resize.
+		window.addEventListener('resize', function(){
+			console.log("resize");
+			scaleAll()
+		});
+
+		// Scale the digits properly every time we exit fullscreen. (NB: Just canvas resize doesn't cut it for some reason)
+		document.addEventListener('fullscreenchange', exitHandler, false);
+		document.addEventListener('mozfullscreenchange', exitHandler, false);
+		document.addEventListener('MSFullscreenChange', exitHandler, false);
+		document.addEventListener('webkitfullscreenchange', exitHandler, false);
+		function exitHandler() {
+			if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null) {
+				scaleAll();
+			}
+		}
+
+		function scaleAll() {
+			let scale = document.body.clientWidth / (showHrs ? 1200 : 800);	// 800 normally, 1200 with HOURS included.
+			scaleDigits(scale);
+
+			let margin1 = 30*scale;
+			let margin2 = 20*scale;
+			let beforeT = 130*scale - 50*scale;// + margin2;
+			let afterT = 130*scale + 50*scale;// + margin2;
+			let right = -40*scale;
+			let dotSize = 20*scale;
+
+			changeStyle( ".digital-watch .minute::after {top: " + beforeT + "px; width: " + dotSize + "px; height: "+dotSize+"px; right: "+right+"px;}" );
+			changeStyle( ".digital-watch .minute::before {top: " + afterT + "px; width: " + dotSize + "px; height: "+dotSize+"px; right: "+right+"px;}" );
+
+			changeStyle( ".digital-watch .hour::after {top: " + beforeT + "px; width: " + dotSize + "px; height: "+dotSize+"px; right: "+right+"px;}" );
+			changeStyle( ".digital-watch .hour::before {top: " + afterT + "px; width: " + dotSize + "px; height: "+dotSize+"px; right: "+right+"px;}" );
+
+			changeStyle( ".digital-watch .second {margin: "+margin1+"px;}" );
+			changeStyle( ".digital-watch .minute {margin: "+margin1+"px;}" );
+			changeStyle( ".digital-watch .hour {margin: "+margin1+"px;}" );
+
+			changeStyle( ".digital-watch svg {margin: " + margin2 + "px;}");
+		};
+
+		function changeStyle(style) {
+			let styleElem = document.head.appendChild(document.createElement("style"));
+			styleElem.innerHTML = style;
+		}
+
+		scaleAll();
+	</script>
+
+</body>
+</html>
